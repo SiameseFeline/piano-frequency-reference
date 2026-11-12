@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piano Frequency Reference — 88 Keys, Frequencies & Acoustic Standards</title>
+  <meta name="description" content="An open-source reference of acoustic frequencies, MIDI numbers, and wavelengths for all 88 keys on a concert piano, calibrated to ISO 16 (A440).">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --gold: #fbbf24;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2.5rem; }
+    h1 { font-size: 2.2rem; margin-bottom: 0.5rem; color: #fff; }
+    p.lead { font-size: 1.1rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 1.5rem; }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .search-box {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: #0f172a;
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th { color: var(--text-muted); font-weight: 600; }
+    tr.highlight { background: rgba(251, 191, 36, 0.1); }
+    tr.highlight td { color: var(--gold); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Open Source Acoustic Reference</div>
+      <h1>Piano Frequency Reference</h1>
+      <p class="lead">Complete frequency chart and acoustic data for all 88 keys, calibrated to the international A440 (ISO 16) tuning standard.</p>
+    </header>
+
+    <div class="card">
+      <h2 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Acoustic Calibration & Standards</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Modern keyboard acoustics are derived using Twelve-Tone Equal Temperament: <code>f(n) = 440 × 2^((n-69)/12)</code>.
+        For practical instruction on tuning instruments by ear to standard pitch, explore the <a href="https://www.freepianotool.com/a440-guide">A440 reference guide</a>.
+        For treble register note calculations and harmonic profiles, see the <a href="https://www.freepianotool.com/notes/G5">G5 frequency reference</a>.
+      </p>
+      <input type="text" id="searchInput" class="search-box" placeholder="Filter by note name (e.g., C4, A4, G5) or frequency..." onkeyup="filterTable()">
+
+      <div style="overflow-x: auto;">
+        <table id="freqTable">
+          <thead>
+            <tr>
+              <th>Key #</th>
+              <th>Note</th>
+              <th>MIDI #</th>
+              <th>Frequency (Hz)</th>
+              <th>Wavelength (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>A0</td><td>21</td><td>27.50 Hz</td><td>1248.0 cm</td></tr>
+            <tr><td>4</td><td>C1</td><td>24</td><td>32.70 Hz</td><td>1049.4 cm</td></tr>
+            <tr><td>16</td><td>C2</td><td>36</td><td>65.41 Hz</td><td>524.7 cm</td></tr>
+            <tr><td>28</td><td>C3</td><td>48</td><td>130.81 Hz</td><td>262.4 cm</td></tr>
+            <tr><td>40</td><td>C4 (Middle C)</td><td>60</td><td>261.63 Hz</td><td>131.2 cm</td></tr>
+            <tr class="highlight"><td>49</td><td>A4 (Concert Pitch)</td><td>69</td><td>440.00 Hz</td><td>78.0 cm</td></tr>
+            <tr class="highlight"><td>59</td><td>G5 (High Treble)</td><td>79</td><td>783.99 Hz</td><td>43.8 cm</td></tr>
+            <tr><td>64</td><td>C6</td><td>84</td><td>1046.50 Hz</td><td>32.8 cm</td></tr>
+            <tr><td>76</td><td>C7</td><td>96</td><td>2093.00 Hz</td><td>16.4 cm</td></tr>
+            <tr><td>88</td><td>C8</td><td>108</td><td>4186.01 Hz</td><td>8.2 cm</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <p>Source repository: <a href="https://github.com/SiameseFeline/piano-frequency-reference">piano-frequency-reference</a>. Released under the MIT License.</p>
+    </footer>
+  </div>
+
+  <script>
+    function filterTable() {
+      const input = document.getElementById("searchInput").value.toUpperCase();
+      const rows = document.getElementById("freqTable").getElementsByTagName("tr");
+      for (let i = 1; i < rows.length; i++) {
+        const text = rows[i].textContent || rows[i].innerText;
+        rows[i].style.display = text.toUpperCase().indexOf(input) > -1 ? "" : "none";
+      }
+    }
+  </script>
+</body>
+</html>
